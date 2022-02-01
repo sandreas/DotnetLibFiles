@@ -44,8 +44,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: InsertVersionToProjectFile
+        shell: bash
+        run: |
+          sed -i "/<\/Description>/a <Version>${{ steps.version.outputs.version-without-v }}<\/Version>" "${env.PROJECT_PATH}"
+            
       - name: Publish nuget
         uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: Sandreas/Sandreas.csproj
+          PROJECT_FILE_PATH: ${env.PROJECT_PATH}
+          INCLUDE_SYMBOLS: true
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
