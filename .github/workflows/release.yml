@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish nuget
-        uses: brandedoutcast/publish-nuget@v2.5.2
+        uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: ${PROJECT_PATH}
+          PROJECT_FILE_PATH: Sandreas/Sandreas.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
