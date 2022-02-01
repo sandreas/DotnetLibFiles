@@ -1,0 +1,45 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+env:
+  GITHUB_USER: 'sandreas'
+  PROJECT_NAME: 'Sandreas.Files'
+  PROJECT_PATH: 'Sandreas/Sandreas.csproj'
+  DOTNET_VERSION: '6.0.100'
+  DOTNET_FRAMEWORK: 'net6.0'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}          
+
+      - name: Get version
+        id: version
+        uses: battila7/get-version-action@v2
+        
+      - name: Extract release notes
+        run: |
+          git log --pretty=format:'%d %s' ${GITHUB_REF} | perl -pe 's| \(.*tag: v(\d+.\d+.\d+(-preview\d{3})?)(, .*?)*\)|\n## \1\n|g' > RELEASE-NOTES
+      
+      - name: Build
+        run: dotnet build --configuration Release /p:Version=${{ steps.version.outputs.version-without-v }}
+      
+      - name: Test
+        run: dotnet test --configuration Release /p:Version=${{ steps.version.outputs.version-without-v }} --no-build
+      
+      - name: Pack
+        run: dotnet pack --configuration Release --include-symbols /p:Version=${{ steps.version.outputs.version-without-v }} --no-build --output .
+      
+      - name: Push
+        run: dotnet nuget push ${PROJECT_NAME}.${VERSION}.nupkg --source https://nuget.pkg.github.com/${GITHUB_USER}/index.json --api-key ${GITHUB_TOKEN}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

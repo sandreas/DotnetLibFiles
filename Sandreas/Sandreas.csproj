@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PackageId>Sandreas.Files</PackageId>
+        <Authors>sandreas</Authors>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <RepositoryUrl>https://github.com/sandreas/DotnetLibFiles.git</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/sandreas/DotnetLibFiles.git</PackageProjectUrl>
+        <PackageTags>files</PackageTags>
+        <Description>
+            This library contains helper classes for working with files
+        </Description>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="System.IO.Abstractions" Version="16.1.5" />
+    </ItemGroup>
+    
+    
+
+</Project>
