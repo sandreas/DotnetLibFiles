@@ -40,6 +40,6 @@ jobs:
         run: dotnet pack --configuration Release --include-symbols /p:Version=${{ steps.version.outputs.version-without-v }} --no-build --output .
       
       - name: Push
-        run: dotnet nuget push ${PROJECT_NAME}.${VERSION}.nupkg --source https://nuget.pkg.github.com/${GITHUB_USER}/index.json --api-key ${GITHUB_TOKEN}
+        run: dotnet nuget push ${PROJECT_NAME}.${{ steps.version.outputs.version-without-v }}.nupkg --source https://nuget.pkg.github.com/${GITHUB_USER}/index.json --api-key ${GITHUB_TOKEN}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
