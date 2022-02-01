@@ -44,10 +44,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish nuget
-        uses: rohith/publish-nuget@v2.5.5
-        with:
-          PROJECT_FILE_PATH: ${{ env.PROJECT_PATH }}
-          INCLUDE_SYMBOLS: true
-          VERSION_STATIC: ${{ steps.version.outputs.version-without-v }}
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+# does work, but something is fishy (strange error message)
+#      - name: Publish nuget
+#        uses: rohith/publish-nuget@v2.5.5
+#        with:
+#          PROJECT_FILE_PATH: ${{ env.PROJECT_PATH }}
+#          INCLUDE_SYMBOLS: true
+#          VERSION_STATIC: ${{ steps.version.outputs.version-without-v }}
+#          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
