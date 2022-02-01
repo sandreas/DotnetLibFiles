@@ -43,3 +43,9 @@ jobs:
         run: dotnet nuget push ${PROJECT_NAME}.${{ steps.version.outputs.version-without-v }}.nupkg --source https://nuget.pkg.github.com/${GITHUB_USER}/index.json --api-key ${GITHUB_TOKEN}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish nuget
+        uses: brandedoutcast/publish-nuget@v2.5.2
+        with:
+          PROJECT_FILE_PATH: ${PROJECT_PATH}
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
