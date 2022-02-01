@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish nuget
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           PROJECT_FILE_PATH: ${{ env.PROJECT_PATH }}
           INCLUDE_SYMBOLS: true
