@@ -9,8 +9,8 @@ public class FileWalker : IEnumerable<string>
     private string _path = "";
     private Func<string, Exception, FileWalkerBehaviour> _exceptionHandler;
     private FileWalkerOptions _options = FileWalkerOptions.Default;
-
     public FileSystem FileSystem => _fs;
+    
     public FileWalker(FileSystem fs, Func<string, Exception, FileWalkerBehaviour>? exceptionHandler = null)
     {
         _fs = fs;
