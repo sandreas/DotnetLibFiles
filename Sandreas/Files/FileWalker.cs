@@ -15,10 +15,18 @@ public class FileWalker : IEnumerable<string>
         _fs = fs;
         _exceptionHandler = exceptionHandler ?? ((_, _) => FileWalkerBehaviour.Default);
     }
-
+    public bool IsDir(string f)
+    {
+        return IsDir(_fs.File.GetAttributes(f));
+    }
     public bool IsDir(IFileInfo f)
     {
-        return f.Attributes.HasFlag(FileAttributes.Directory);
+        return IsDir(f.Attributes);
+    }
+    
+    public bool IsDir(FileAttributes attributes)
+    {
+        return attributes.HasFlag(FileAttributes.Directory);
     }
     
     public FileWalker Walk(string path)
