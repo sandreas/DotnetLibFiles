@@ -97,7 +97,10 @@ public class FileWalker : IEnumerable<string>
             var dirs = _fs.Directory.EnumerateDirectories(currentPath).ToArray();
             if (_options.HasFlag(FileWalkerOptions.Recursive))
             {
-                dirs.AsParallel().ForAll(pending.Push);
+                foreach (var dir in dirs)
+                {
+                    pending.Push(dir);
+                }
             }
 
             foreach (var item in tmp.Concat(dirs))
