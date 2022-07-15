@@ -6,7 +6,7 @@ on:
 env:
   GITHUB_USER: 'sandreas'
   PROJECT_NAME: 'Sandreas.Files'
-  PROJECT_PATH: 'Sandreas/Sandreas.csproj'
+  PROJECT_PATH: 'Sandreas.Files/Sandreas.Files.csproj'
   DOTNET_VERSION: '6.0.301'
   DOTNET_FRAMEWORK: 'net6.0'
 jobs:
