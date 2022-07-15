@@ -12,6 +12,7 @@
         <Description>
             This library contains helper classes for working with files
         </Description>
+        <RootNamespace>Sandreas</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>
