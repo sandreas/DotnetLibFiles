@@ -7,8 +7,7 @@ env:
   GITHUB_USER: 'sandreas'
   PROJECT_NAME: 'Sandreas.Files'
   PROJECT_PATH: 'Sandreas.Files/Sandreas.Files.csproj'
-  DOTNET_VERSION: '6.0.301'
-  DOTNET_FRAMEWORK: 'net6.0'
+  DOTNET_VERSION: '7.0.x'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,12 +43,3 @@ jobs:
           dotnet nuget push ${{ env.PROJECT_NAME }}.${{ steps.version.outputs.version-without-v }}.nupkg --source https://nuget.pkg.github.com/${{ env.GITHUB_USER }}/index.json --api-key ${GITHUB_TOKEN} && dotnet nuget push ${{ env.PROJECT_NAME }}.${{ steps.version.outputs.version-without-v }}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}           
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
- # does work, but something is fishy (strange error message)
-#      - name: Publish nuget
-#        uses: rohith/publish-nuget@v2.5.5
-#        with:
-#          PROJECT_FILE_PATH: ${{ env.PROJECT_PATH }}
-#          INCLUDE_SYMBOLS: true
-#          VERSION_STATIC: ${{ steps.version.outputs.version-without-v }}
-#          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
